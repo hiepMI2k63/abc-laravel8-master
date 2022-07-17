@@ -1,0 +1,41 @@
+1. setup vendor
+- composer install
+- npm install //neu dung npm package
+2. copy environment
+- copy .env.example .env
+3. Generate key
+- php artisan key:generate
+
+Tham khao:
+- https://viblo.asia/p/cach-cai-dat-du-an-laravel-clone-tu-github-63vKjkpkZ2R
+- https://itzone.com.vn/vi/article/cach-ket-noi-du-an-laravel-tren-github/
+- https://support.acquia.com/hc/en-us/articles/360005257234-Introduction-to-htaccess-rewrite-rules
+- https://www.youtube.com/watch?v=QccrkDTPAMI&list=PLFWDoeAHRLTavL53RywOPAlQ45JRh0NI8
+- https://www.youtube.com/watch?v=xfSks-NdHPw&list=PLz_YkiqIHesvPtvLl2Wz5FtuW44dBt199
+- https://github.com/surfsidemedia/Laravel-8-E-Commerce
+
+
+phần checkout
+CREATE TABLE 'Payment'(
+ `id` int (11) NOT NULL,
+ `order_id` varchar (255) NOT NULL,
+ `thanh_vien` varchar(100) NOT NULL COMMENT 'hanh viên thanh toán',
+  `money` float NOT NULL COMMENT 'số tiền thanh toán',
+  `note`  varchar (100) DEFAULT NULL COMMENT 'GHI CHÚ',
+ `vnp_response_code` varchar(255) NOT NULL COMMENT 'mã phản hồi',
+ `code_vnpay` varchar (255) NOT NULL COMMENT  'code giao dịch vnp',
+  `code_bank` varchar (255) NOT NULL COMMENT  'code giao dịch ngân hàng',
+   `time` datetime NOT NULL COMMENT 'thời gian chuyển khoản'
+) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+// comment cả khối là không đăng nhập đc
+  public function prepareValueAndOperator($value, $operator, $useDefault = false)
+    {
+        if ($useDefault) {
+            return [$operator, '='];
+        } elseif ($this->invalidOperatorAndValue($operator, $value)) {
+           // throw new InvalidArgumentException('Illegal operator and value combination.');
+        }
+
+        return [$value, $operator];
+    }
+// không được để id trong cái namespace App\Http\Livewire\ProductDetail;
