@@ -33,7 +33,7 @@ class SelectCondition extends Component
 
     public function selectCategory($catid){
         if ($this->selectionCatid==$catid){
-            $this->selectionCatid=1;
+            $this->selectionCatid=null;
         }else {
             $this->selectionCatid=$catid;
         }

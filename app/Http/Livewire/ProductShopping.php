@@ -36,7 +36,7 @@ class ProductShopping extends Component
         $this->maxPrice=Sanpham::max('gia');
     }
 
-    public function updateSelection(){
+    public function updateSelection($catid, $minPrice, $maxPrice){
         $this->selectionCatid=$catid;
         $this->minPrice=$minPrice;
         $this->maxPrice=$maxPrice;
