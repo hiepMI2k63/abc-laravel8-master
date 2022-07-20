@@ -7,6 +7,7 @@ use App\Http\Controllers\UserManagementController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\CounponsController;
+use App\Http\Controllers\TrancisionController;
 use App\Http\Middleware\CheckAdminLogin;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CheckOut;
@@ -46,6 +47,7 @@ Route::prefix('admin')->name('admin.')->middleware([CheckAdminLogin::class])->gr
         'usermanagement' => UserManagementController::class,
         'counpons' => CounponsController::class,
         'review' => ReviewController::class,
+        'trancision' => TrancisionController::class,
     ]);
 
 });

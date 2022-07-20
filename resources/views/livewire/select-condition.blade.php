@@ -7,7 +7,6 @@
               <li><a href="#" wire:click.prevent="selectCategory({{$category->id}})">{{$category->ten}}
                   @if($category->id==$this->selectionCatid)
                       <span>***</span>
-                      {{-- @dd($this->selectionCatid); --}}
                   @endif
                   </a>
               </li>
@@ -105,7 +104,6 @@
   @push('scripts')
   <script type="text/javascript">
       function update_price(minPrice, maxPrice){
-          // alert(minPrice);
           @this.call('updatePrice', minPrice, maxPrice);
       }
   </script>

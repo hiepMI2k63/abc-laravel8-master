@@ -35,7 +35,8 @@ class RegistrationController extends Controller
         $dataArray = array(
             "name" => $request->name,
             "email" => $request->email,
-            "password" => $request->password
+            "password" => $request->password,
+            "status" => 1
         );
 
         $user = User::create($dataArray);

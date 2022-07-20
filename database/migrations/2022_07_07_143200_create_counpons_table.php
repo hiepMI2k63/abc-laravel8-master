@@ -13,7 +13,7 @@ class CreateCounponsTable extends Migration
      */
     public function up()
     {
-        Schema::create('counpons', function (Blueprint $table) {
+        Schema::create('coupons', function (Blueprint $table) {
             $table->id();
             $table->string('code')->unique();
             $table->enum('type',['fixed','percent']);
@@ -30,6 +30,6 @@ class CreateCounponsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('counpons');
+        Schema::dropIfExists('coupons');
     }
 }

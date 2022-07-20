@@ -234,6 +234,14 @@
                   </p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="{{route('admin.trancision.index')}}" class="nav-link">
+                  <i class="nav-icon fas fa-file"></i>
+                  <p>
+                  Trancision
+                  </p>
+                </a>
+              </li>
             <li class="nav-item">
               <a href="{{route('admin.getlogout')}}" class="nav-link">
                 <i class="nav-icon fa fa-sign-out-alt"></i>

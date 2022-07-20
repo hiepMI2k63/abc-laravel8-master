@@ -275,17 +275,18 @@
                                         <td class="shoping__cart__total">
                                             {{ $i->status }}
                                         </td>
-                                        <td class="shoping__cart__quantity">
+                                        {{-- <td class="shoping__cart__quantity">
                                             @if ($i->status == "đã giao thành công")
-                                            <a name="" id="" class="btn btn-sm btn-danger btndelete" href="{{route('productdetail',$i->id_item)}}" role="button"><i class="fa fa-trash"></i> feedback</a>
+
 
                                             @endif
-                                        </td>
+                                        </td> --}}
                                         <td class="shoping__cart__item__close">
-                                        @if ($i->id_item !=null)
-                                        <a name="" id="" class="btn btn-sm btn-danger btndelete" href="{{route('deleteorder',$i->id_item)}}" role="button"><i class="fa fa-trash"></i> </a>
+                                            @if ($i->status == "đã giao thành công")
+                                            <a name="" id="" class="btn btn-sm btn-danger btndelete" href="{{route('productdetail',$i->product_id)}}" role="button"><i class="fa fa-trash"></i> feedback</a>
+
                                         @else
-                                            oki
+                                        <a name="" id="" class="btn btn-sm btn-danger btndelete" href="{{route('deleteorder',$i->id_item)}}" role="button"><i class="fa fa-trash"></i> </a>
                                         @endif
 
                                         </td>

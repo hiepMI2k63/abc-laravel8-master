@@ -31,7 +31,7 @@ class CheckOut extends Controller
        ->join('sanpham', 'sanpham.id', '=', 'order_items.product_id')
        ->where('trancisions.user_id', '=', auth()->user()->id)
        ->get();
-       // dd($ordetails);
+        //dd($ordetails);
        // lấy thêm đc cả id order_item
 
        return view('site.orderstatus',compact('ordetails'));
@@ -40,25 +40,28 @@ class CheckOut extends Controller
     {
         // get order_item for delete
        $items =DB::table('order_items')
-       ->where('order_items.id', '=', 25)//$request->id_item)
+       ->where('order_items.id', '=', $request->id_item)
        ->get();
+
       // get order
       $order =  Order::find($items[0]->order_id);
 
-     // get counpon
-     $counpon =DB::table('counpons')
-     ->where('counpons.code', '=', $order->coupon)//$request->id_item)
+     // get coupon
+     $coupon =DB::table('counpons')
+     ->where('counpons.code', '=', $order->coupon)
      ->get();
 
      // save order
      // change total, subtotal
 
-        if ($counpon[0]->type == "fixed") {
-            $order->total =  $order->total + $counpon[0]->value - $items[0]->price*$items[0]->quantity*1.100;
+        if ($coupon[0]->type == "fixed") {
+            $order->total =  $order->total + $coupon[0]->value - $items[0]->price*$items[0]->quantity*1.100;
             $order->subtotal = $order->total*0.9;
+
+
         }
-        if ($counpon[0]->type == "percent") {
-            $order->total =  $order->total + $counpon[0]->value - $items[0]->price*$items[0]->quantity*1.100;
+        if ($coupon[0]->type == "percent") {
+            $order->total =  $order->total + $coupon[0]->value - $items[0]->price*$items[0]->quantity*1.100;
             $order->subtotal = $order->total*0.9;
         }
         if($order->total  < 0 || $order->subtotal < 0 )
@@ -66,6 +69,7 @@ class CheckOut extends Controller
             $order->total = 0;
             $order->subtotal = 0;
         }
+
        $order->save();
        OrderItem::where('id', $request->id_item)->delete();
         return redirect()->route('orderstatus');
@@ -80,6 +84,7 @@ class CheckOut extends Controller
     {
 
         $order = new Order();
+        $order->coupon= $request->coupon;
         $order->user_id = Auth::user()->id;
         $order->subtotal = session()->get('checkout')['subtotal'];
         $order->tax =session()->get('checkout')['tax'];

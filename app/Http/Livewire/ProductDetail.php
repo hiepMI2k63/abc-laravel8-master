@@ -17,6 +17,7 @@ class ProductDetail extends Component
     {
 
         $this->id_ko_Dc_de_id = $param;
+
     }
     public function store($product_id, $product_name, $product_price)
     {
@@ -57,7 +58,7 @@ class ProductDetail extends Component
     public function render()
     {
 
-        //dd($this->id_ko_Dc_de_id);
+
         $product = Sanpham::where('id',$this->id_ko_Dc_de_id)->first();
         $getreview = Review::where('product_id',$this->id_ko_Dc_de_id)->get();
         $related_product = Sanpham::where('nhomsanphamid',$product->nhomsanphamid)->where('id','!=',$this->id_ko_Dc_de_id)->get();
