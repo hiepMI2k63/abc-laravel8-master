@@ -25,7 +25,7 @@ class Sanpham extends Migration
             $table->tinyInteger('trangthai')->default(1)->comment('1-public, 0-private');
             $table->tinyInteger('uutien')->default(0)->comment('Thu tu uu tien');
             $table->timestamps();
-            $table->foreign('nhomsanphamid')->references('id')->on('Nhomsanpham');
+            $table->foreign('nhomsanphamid')->references('id')->on('nhomsanpham');
         });
     }
 

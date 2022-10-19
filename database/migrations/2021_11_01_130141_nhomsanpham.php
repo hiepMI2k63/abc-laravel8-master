@@ -13,7 +13,7 @@ class Nhomsanpham extends Migration
      */
     public function up()
     {
-        Schema::create('Nhomsanpham', function (Blueprint $table) {
+        Schema::create('nhomsanpham', function (Blueprint $table) {
             $table->id();
             $table->string('ten', 100)->uniqid();
             $table->string('mota', 255)->nullable();
@@ -30,6 +30,6 @@ class Nhomsanpham extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Nhomsanpham');
+        Schema::dropIfExists('nhomsanpham');
     }
 }
