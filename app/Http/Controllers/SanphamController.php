@@ -108,7 +108,7 @@ class SanphamController extends Controller
     public function update(Request $request, Sanpham $sanpham)
     {
         $request->validate([
-            'ten'=>'required|unique:nhomsanpham,ten,'.$sanpham->id,
+            'ten'=>'required|unique:Nhomsanpham,ten,'.$sanpham->id,
             'gia'=>'required',
             'uutien'=>'required',
         ],

@@ -43,7 +43,7 @@ class NhomsanphamController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'ten'=>'required|unique:nhomsanpham,ten',
+            'ten'=>'required|unique:Nhomsanpham,ten',
             'uutien'=>'required',
         ],
         [
@@ -91,7 +91,7 @@ class NhomsanphamController extends Controller
     public function update(Request $request, Nhomsanpham $nhomsanpham)
     {
         $request->validate([
-            'ten'=>'required|unique:nhomsanpham,ten,'.$nhomsanpham->id,
+            'ten'=>'required|unique:Nhomsanpham,ten,'.$nhomsanpham->id,
             'uutien'=>'required',
         ],
         [

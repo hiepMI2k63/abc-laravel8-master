@@ -33,8 +33,8 @@ Route::get('/admin/login', [AdminLoginController::class,'getlogin'])->name('admi
 Route::post('/admin/login', [AdminLoginController::class,'postlogin'])->name('admin.postlogin');
 Route::get('/admin/logout', [AdminLoginController::class,'getlogout'])->name('admin.getlogout');
 
-// ->middleware([CheckAdminLogin::class])->middleware([CheckAdminLogin::class])
-Route::prefix('admin')->name('admin.')->group(function(){
+// ->middleware([CheckAdminLogin::class])
+Route::prefix('admin')->name('admin.')->middleware([CheckAdminLogin::class])->group(function(){
     Route::get('/', [AdminLoginController::class, 'dashboard'])->name('dashboard');
 
     Route::get('/file', function () {
