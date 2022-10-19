@@ -4,7 +4,7 @@
 
 @section('content')
     <form action="{{route('admin.nhomsanpham.store')}}" method='post'>
-        @csrf
+        {{ csrf_field() }}
         <div class="form-group">
           <label for="tennhomsanpham">Tên nhóm sản phẩm</label>
           <input type="text" value="{{old('ten')}}" class="form-control" name="ten" id="tennhomsanpham" aria-describedby="helpId" placeholder="Tên nhóm sản phẩm">
