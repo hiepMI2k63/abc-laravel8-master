@@ -20,7 +20,7 @@
 <body class="hold-transition login-page">
   <div class="login-box">
     <div class="login-logo">
-      <a href="{{url('adminlte123')}}/index2.html"><b>ABC</b>-Laravel8</a>
+      <a href="{{url('adminlte123')}}/index2.html"><b>Trang đăng nhập</b></a>
     </div>
     <!-- /.login-logo -->
     <div class="card">

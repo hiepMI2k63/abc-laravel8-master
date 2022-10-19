@@ -24,9 +24,8 @@ class SaleoffProduct extends Component
         ->groupBy('reviews.product_id')
         ->select( DB::raw('AVG(reviews.rating) as rating'),'reviews.product_id as id')
         ->get();
-
+       // dd($rating);
         $products=Sanpham::whereNotNull('giaban')->orderByRaw("giaban/gia ASC")->take(5)->get();
-
         return view('livewire.saleoff-product', compact('products','rating'));
     }
 }

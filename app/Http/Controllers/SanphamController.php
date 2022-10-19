@@ -46,13 +46,14 @@ class SanphamController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+
             'ten'=>'required|unique:sanpham',
             'gia'=>'required',
             'uutien'=>'required',
         ],
         [
             'ten.required' => 'Cần nhập tên nhóm sản phẩm',
-            'ten.unique' => 'Tên nhóm sản phẩm cần duy nhất',
+            'ten.unique' => 'Tên  sản phẩm cần duy nhất',
             'gia.required' => 'Cần nhập giá sản phẩm',
             'uutien.required' => "Cần nhập mức độ ưu tiên",
 

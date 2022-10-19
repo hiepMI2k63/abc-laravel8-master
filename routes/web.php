@@ -95,3 +95,4 @@ Route::get("/orderstatus", [CheckOut::class, 'orderstatus'])->name('orderstatus'
 
 Route::put("/user/{id}", [UserManagementController::class, 'change'])->name('change');
 Route::get("/modifile/{id}", [UserManagementController::class, 'modifile'])->name('modifile');
+Route::delete("/deleteuser/{id}", [UserManagementController::class, 'deleteuser'])->name('deleteuser');

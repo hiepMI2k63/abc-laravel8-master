@@ -36,9 +36,10 @@ class RegistrationController extends Controller
             "name" => $request->name,
             "email" => $request->email,
             "password" => $request->password,
-            "status" => 1
+            "level" => $request->level,
+            "status" => $request->status,
         );
-
+       //dd($request->all());
         $user = User::create($dataArray);
         auth()->login($user);
 

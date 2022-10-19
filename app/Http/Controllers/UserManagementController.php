@@ -33,8 +33,14 @@ class UserManagementController extends Controller
      */
     public function change( Request $request , $id)
     {
-
-        dd($request->all());
+        $user =User::find($id);
+        $user->status = $request->status;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        if ($user->save()){
+            return redirect()->route('admin.usermanagement.index')->with('success','thay đổi thành công.');
+        }
 
     }
 
@@ -81,7 +87,6 @@ class UserManagementController extends Controller
      */
     public function update(Request $request, User $user)
     {
-dd($request->all());
 
         // if ($user->update($request->all())){
         //     return redirect()->route('admin.user.index')->with('success','Thêm mới thành công.');
@@ -97,5 +102,13 @@ dd($request->all());
     public function destroy(User $user)
     {
         //
+    }
+    public function deleteuser($id )
+    {
+
+        $user =User::find($id);
+//dd($user);
+        $user->delete();
+        return redirect()->route('admin.usermanagement.index')->with('delete','xóa thành công.');
     }
 }

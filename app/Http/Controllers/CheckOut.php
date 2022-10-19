@@ -33,58 +33,88 @@ class CheckOut extends Controller
        ->get();
         //dd($ordetails);
        // lấy thêm đc cả id order_item
-
+        //dd($ordetails);
        return view('site.orderstatus',compact('ordetails'));
     }
     public function deleteOrder( $id_item, Request $request)
     {
         // get order_item for delete
-       $items =DB::table('order_items')
-       ->where('order_items.id', '=', $request->id_item)
-       ->get();
+     $item = OrderItem::find($request->id_item);//DB::table('order_items')
+        //dd($item);
+    //    ->where('order_items.id', '=', $request->id_item)
+    //    ->get();
+      // dd($items);
 
       // get order
-      $order =  Order::find($items[0]->order_id);
+      $order =  Order::find($item->order_id);
+      //dd($order);
 
      // get coupon
      $coupon =DB::table('counpons')
      ->where('counpons.code', '=', $order->coupon)
      ->get();
 
-     // save order
-     // change total, subtotal
+    if ( $order->coupon == "không sử dụng") {
 
+            $order->total =  $order->total - $item->price*$item->quantity*1.100;
+            $order->subtotal = $order->total*0.9;
+
+    }
+    else
+    {
         if ($coupon[0]->type == "fixed") {
-            $order->total =  $order->total + $coupon[0]->value - $items[0]->price*$items[0]->quantity*1.100;
+            $order->total =  $order->total + $coupon[0]->value - $item->price*$item->quantity*1.100;
             $order->subtotal = $order->total*0.9;
 
 
         }
         if ($coupon[0]->type == "percent") {
-            $order->total =  $order->total + $coupon[0]->value - $items[0]->price*$items[0]->quantity*1.100;
+            $order->total =  $order->total + $coupon[0]->value - $item->price*$item->quantity*1.100;
             $order->subtotal = $order->total*0.9;
         }
+
         if($order->total  < 0 || $order->subtotal < 0 )
         {
             $order->total = 0;
             $order->subtotal = 0;
         }
+    }
+
 
        $order->save();
        OrderItem::where('id', $request->id_item)->delete();
         return redirect()->route('orderstatus');
 
     }
+
+
+
+
+
     public function index()
     {
         $items=Cart::content();
         return view('site.checkout',compact('items'));
     }
+
+
+
+
+
     public function create( Request $request)
     {
 
         $order = new Order();
-        $order->coupon= $request->coupon;
+        if (session()->has('coupon')) {
+
+        $order->coupon= session()->get('coupon')['code'];
+        }
+        else
+        {
+            $order->coupon = "không sử dụng";
+
+            }
+
         $order->user_id = Auth::user()->id;
         $order->subtotal = session()->get('checkout')['subtotal'];
         $order->tax =session()->get('checkout')['tax'];
@@ -94,13 +124,21 @@ class CheckOut extends Controller
         $order->email= $request->email;
         $order->phone= $request->phone;
         $order->address= $request->diachi;
-      //  $order->zipcode= $this->zipcode;
-           $order->save();
+
+          $order->save();
+
             $transi = new Trancision();
             $transi->user_id = Auth::user()->id;
             $transi->order_id = $order->id;
               $transi->mode = $request->type;
-            $transi->status = 'đang giao hàng cấm boom hàng';
+              session()->put('paymenttype',$request->type);
+              if ($request->type == "online") {
+                $transi->status = 'đã giao thành công';
+              }
+              else{
+                $transi->status = 'chưa giải quyết(có thể cancel)';
+              }
+              //dd($transi);
             $transi->save();
            session()->put('id',$order->id);
          $items =Cart::content();
@@ -115,7 +153,9 @@ class CheckOut extends Controller
             $item->id_item = $item->id;
             $item->save();
         }
-        $vnp_TxnRef = date("YmdHis");//Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
+
+        if ($request->type == "online") {
+            $vnp_TxnRef = date("YmdHis");//Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
         $vnp_OrderInfo = "thanh toan ";
         $vnp_OrderType = 'billpayment';
         $vnp_Amount =   $order->total*100;
@@ -206,6 +246,30 @@ class CheckOut extends Controller
         }
        Cart::destroy();
        return redirect($vnp_Url);
+
+        }
+        else {
+
+                $payment = new Payment();
+                $payment->order_id =   $order->id;
+               // $payment->code_vnpay = $_GET['code_vnpay'];
+                $payment->code_vnpay = "null";
+                 $payment->code_bank = "null";
+              $payment->typecard = "null";
+                $payment->vnp_response_code = "00";
+                $payment->note = "thanh toán trực tiếp";
+              $payment->amount = $order->total;// rong migration ghi là
+               $payment->TransactionNo = rand();
+              $payment->TransactionStatus = 0;
+                $payment->save();
+             $amount = $payment->amount;
+             session()->forget('coupon');
+             return view('livewire.return-payment',compact('amount'));
+        }
+
+
+
+
     }
     public function payment()
     {
@@ -223,9 +287,11 @@ class CheckOut extends Controller
           $payment->amount = $_GET['vnp_Amount']/100;;// rong migration ghi là
            $payment->TransactionNo = $_GET['vnp_TransactionNo'];
           $payment->TransactionStatus = $_GET['vnp_TransactionStatus'];
+
              $payment->save();
          }
          $amount = $payment->amount;
+         session()->forget('coupon');
          return view('livewire.return-payment',compact('amount'));
     }
 }

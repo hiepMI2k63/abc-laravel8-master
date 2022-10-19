@@ -14,6 +14,7 @@ class AdminLoginController extends Controller
 
     public function getlogin()
     {
+
         // khi mới vào sau đó chuyển tới post
         if (Auth::check()){
             return redirect()->route('admin.dashboard');
@@ -24,6 +25,7 @@ class AdminLoginController extends Controller
     }
     public function postlogin(Request $request)
     {
+       // dd($request->all());
         $login=[
             'email'=>$request->txtEmail,
             'password' => $request->txtPassword,
@@ -38,12 +40,9 @@ class AdminLoginController extends Controller
                else{
                     return redirect()->intended(route('shop'));
                 }
-
-
-
         }
         else{
-            return back()->withErrors(['message'=> 'Email hay Password không chính xác']);
+            return back()->withErrors(['message'=> 'Email hay Password không chính xác1111']);
         }
     }
     public function getlogout(Request $request)

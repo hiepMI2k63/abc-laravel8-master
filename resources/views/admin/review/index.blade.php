@@ -23,11 +23,10 @@
 <table class="table table-hover">
   <thead>
     <tr>
-      <th>Id</th>
-      <th>Name</th>
+      <th>Rating</th>
+      <th>Comment</th>
       <th>Email</th>
-      <th>Level</th>
-      <th>Status</th>
+
       <th class='text-right'>Actions</th>
     </tr>
   </thead>
@@ -35,19 +34,9 @@
     @foreach ($data as $user)
     <tr>
       <td>{{$user->rating}}</td>
-      <td>{{$user->name}}</td>
+      <td>{{$user->comment}}</td>
       <td>{{$user->user2->name}}</td>
-      <td>
-        <td>{{$user->product->ten}}</td>
 
-      </td>
-      <td>
-        @if($user->status==0)
-        <span class="badge badge-danger">Deleted</span>
-        @else
-        <span class="badge badge-success">Active</span>
-        @endif
-      </td>
       <td class='text-right'>
         <a href="{{route('admin.review.edit',$user->id)}}" class="btn btn-sm btn-success">
           <i class="fas fa-edit"></i>

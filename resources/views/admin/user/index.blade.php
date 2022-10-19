@@ -41,9 +41,10 @@
         @if($user->level==0)
         <span class="badge badge-danger">Sys admin</span>
         @elseif ($user->level==1)
-        <span class="badge badge-success">Người quản lý</span>
-        @else
         <span class="badge badge-success">User</span>
+
+        @else
+        <span class="badge badge-success">Người quản lý</span>
         @endif
       </td>
       <td>
@@ -57,7 +58,7 @@
         <a href="{{route('modifile',$user->id)}}" class="btn btn-sm btn-success">
           <i class="fas fa-edit"></i>
         </a>
-        <a href="{{route('admin.usermanagement.destroy',$user->id)}}" class="btn btn-sm btn-danger btndelete">
+        <a href="{{route('deleteuser',$user->id)}}" class="btn btn-sm btn-danger btndelete">
           <i class="fas fa-trash"></i>
         </a>
       </td>

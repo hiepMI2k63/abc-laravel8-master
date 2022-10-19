@@ -252,11 +252,11 @@
                         <table>
                             <thead>
                                 <tr>
-                                    <th class="shoping__product">tên sản phẩm </th>
-                                    <th>Price</th>
-                                    <th>Quantity</th>
-                                    <th>Total</th>
-                                    <th>Hủy đơn hàng</th>
+                                    <th class="shoping__product">Tên sản phẩm </th>
+                                    <th> Mã Order </th>
+                                    <th> Số lượng </th>
+                                    <th>Trạng thái </th>
+                                    <th>Hủy đơn hàng hoặc feedback</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -266,14 +266,17 @@
                                             <img src="img/cart/cart-1.jpg" alt="">
                                             <h5>{{ $i->ten }}</h5>
                                         </td>
-                                        <td class="shoping__cart__price">
-                                            {{ $i->total }}
+                                        <td class="shoping__cart__item">
+                                            <img src="img/cart/cart-1.jpg" alt="">
+                                            <h5 style="padding-left: 80px;"> {{ $i->order_id }}</h5>
                                         </td>
-                                        <td class="shoping__cart__quantity">
-                                            <h5> {{ $i->quantity }}</h5>
+                                        <td class="shoping__cart__item">
+                                            <img src="img/cart/cart-1.jpg" alt="">
+                                            <h5 style="padding-left: 80px;"> {{ $i->quantity }}</h5>
                                         </td>
-                                        <td class="shoping__cart__total">
-                                            {{ $i->status }}
+                                        <td class="shoping__cart__item">
+                                            <img src="img/cart/cart-1.jpg" alt="">
+                                           <h4>{{ $i->status }}</h4>
                                         </td>
                                         {{-- <td class="shoping__cart__quantity">
                                             @if ($i->status == "đã giao thành công")
@@ -282,11 +285,13 @@
                                             @endif
                                         </td> --}}
                                         <td class="shoping__cart__item__close">
-                                            @if ($i->status == "đã giao thành công")
-                                            <a name="" id="" class="btn btn-sm btn-danger btndelete" href="{{route('productdetail',$i->product_id)}}" role="button"><i class="fa fa-trash"></i> feedback</a>
-
-                                        @else
+                                         @if ($i->status == "đã giao thành công")
+                                            <a name="" id="" class="btn btn-sm btn-danger btndelete" href="{{route('productdetail',$i->product_id)}}" role="button">feedback</a>
+                                        @elseif ($i->status == "chưa giải quyết(có thể cancel)" ||$i->status == "chấp thuận( có thể cancel)" )
                                         <a name="" id="" class="btn btn-sm btn-danger btndelete" href="{{route('deleteorder',$i->id_item)}}" role="button"><i class="fa fa-trash"></i> </a>
+                                        @else
+
+                                        <h5>Đang giao hàng</h5>
                                         @endif
 
                                         </td>

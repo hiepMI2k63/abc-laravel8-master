@@ -18,7 +18,7 @@ class NhomsanphamController extends Controller
             $data =  Nhomsanpham::paginate(1);//Nhomsanpham::where('ten', 'like', '%'.$key.'%')->orderby('uutien','DESC')->paginate(5);
         }
         else {
-            $data = Nhomsanpham::paginate(2);
+            $data = Nhomsanpham::paginate(5);
         }
 
         return view('admin.nhomsanpham.index',['data'=>$data]);

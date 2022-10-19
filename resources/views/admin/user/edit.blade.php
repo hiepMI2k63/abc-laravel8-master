@@ -14,14 +14,14 @@
         </div>
         <div class="form-group">
           <label for="email">email</label>
-          <input type="text" placeholder="{{$user->name}}" class="form-control" name="email" id="email" aria-describedby="helpId" >
+          <input type="text" value="{{$user->email}}" class="form-control" name="email" id="email" aria-describedby="helpId" >
           @error('email')
           <small class="text-danger">{{$message}}</small>
           @enderror
         </div>
         <div class="form-group">
             <label for="password">Password</label>
-            <input type="text" placeholder="{{$user->password}}" class="form-control" name="password" id="password" aria-describedby="helpId" >
+            <input type="text" value="{{$user->password}}" class="form-control" name="password" id="password" aria-describedby="helpId" >
             @error('password')
             <small class="text-danger">{{$message}}</small>
             @enderror
@@ -29,8 +29,14 @@
           <div class="form-group">
             <label for="level">level</label>
             <select class="form-control" name="level" id="level">
-              <option value="1" @if ($user->level=="1") selected='selected' @endif>admin</option>
-              <option value="0" @if ($user->level=="0") selected='selected' @endif>customer</option>
+               @if ($user->level=="0")
+               <option value="0" @if ($user->level=="0") selected='selected' @endif>admin</option>
+               <option value="0" @if ($user->level=="1") selected='selected' @endif>customer</option>
+               @else
+               <option value="1" @if ($user->level=="0") selected='selected' @endif>admin</option>
+               <option value="1" @if ($user->level=="1") selected='selected' @endif>customer</option>
+               @endif
+
             </select>
           </div>
           <div class="form-group">

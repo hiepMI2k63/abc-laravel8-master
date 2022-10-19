@@ -117,6 +117,7 @@ class ShoppingCart extends Component
 
     public function render()
     {
+
         $this->emitTo('cart-counter', 'postCartProcessed');
 
         $items=Cart::content();

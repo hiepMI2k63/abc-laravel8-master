@@ -278,7 +278,7 @@
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
                                         <p>Fist Name<span>*</span></p>
-                                        <input type="text"value="{{old('ten')}}" class="form-control" name="ten" id="" aria-describedby="helpId" placeholder="Tên nhóm sản phẩm">
+                                        <input type="text"value="{{old('ten')}}" class="form-control" name="ten" id="" aria-describedby="helpId" >
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
@@ -288,10 +288,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="checkout__input">
-                                <p>Country<span>*</span></p>
-                                <input type="text">
-                            </div>
+
                             <div class="checkout__input">
                                 <p>Address<span>*</span></p>
                                 <input type="text" placeholder="Street Address" class="checkout__input__add"value="{{old('diachi')}}" class="form-control" name="diachi" id="" aria-describedby="helpId">
@@ -388,14 +385,14 @@
                                 <div class="checkout__input__checkbox">
                                     <label for="payment">
                                         Online
-                                        <input type="checkbox" id="payment"value="0" name="type">
+                                        <input type="checkbox" id="payment"value="online" name="type">
                                         <span class="checkmark"></span>
                                     </label>
                                 </div>
                                 <div class="checkout__input__checkbox">
                                     <label for="paypal">
                                         Cash
-                                        <input type="checkbox" id="paypal" value="1" name="type">
+                                        <input type="checkbox" id="paypal" value="cash" name="type">
                                         <span class="checkmark"></span>
                                     </label>
                                 </div>

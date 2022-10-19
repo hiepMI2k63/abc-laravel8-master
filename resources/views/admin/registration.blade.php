@@ -20,7 +20,7 @@
 <body class="hold-transition register-page">
     <div class="register-box">
         <div class="register-logo">
-            <a href="{{ route('home') }}"><b>Admin</b>LTE</a>
+            <a href="{{ route('home') }}"><b>Đăng ký tài khoản</b></a>
         </div>
 
         <div class="card">
@@ -39,6 +39,19 @@
                         @error('name')
                             <div style="width:100%" class="help-text text-danger">{{ $message }}</div>
                         @enderror
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="level">level</label>
+                        <select class="form-control" name="level" id="level">
+                           <option value="0"  >admin</option>
+                           <option value="1"  >user</option>
+                        </select>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="status">status</label>
+                        <select class="form-control" name="status" id="status">
+                           <option value="1"  >online</option>
+                        </select>
                     </div>
                     <div class="input-group mb-3">
                         <input type="email" class="form-control" name="email" id="email" placeholder="Email">

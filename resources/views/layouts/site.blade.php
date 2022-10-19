@@ -151,6 +151,7 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="header__logo">
+
                         <a href="{{route('home')}}"><img src="{{url('site')}}/img/logo.png" alt=""></a>
                     </div>
                 </div>
@@ -202,6 +203,7 @@
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-6 offset-lg-1">
+                    <div id=""></div>
                     <div class="footer__widget">
                         <h6>Useful Links</h6>
                         <ul>
@@ -274,7 +276,15 @@
     <!-- Latest compiled and minified JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
 
-
+<script>
+    $(function() {
+        $("#rateYoRoot").rateYo({
+            rating: 3.5,
+            starWidth: "15px",
+            readOnly: true,
+        });
+    });
+</script>
 @stack('scripts')
 </body>
 

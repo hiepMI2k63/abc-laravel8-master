@@ -80,7 +80,7 @@ class ProductDetail extends Component
                 }
 
             };
-
+           // dd($average);
         return view('livewire.product-detail',compact('product','getreview','average','images','related_product','flag'))->layout('layouts.base');
     }
 }

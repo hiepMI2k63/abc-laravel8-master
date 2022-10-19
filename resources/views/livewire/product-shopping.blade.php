@@ -84,6 +84,7 @@
             </h5>
             </div>
         </div>
+        <div > <span id="rateYoRoot"> </span></div>
     </div>
     @endforeach
   @endif
@@ -94,6 +95,15 @@
 
 
 @push('scripts')
+<script>
+    $(function() {
+        $("#rateYoRoot").rateYo({
+            rating: 3.5,
+            starWidth: "15px",
+            readOnly: true,
+        });
+    });
+</script>
 <script>
     $(function(){
         $("#sortbyid").on('change', function(e){

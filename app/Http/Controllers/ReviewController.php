@@ -20,7 +20,7 @@ class ReviewController extends Controller
         // if ($key=request()->key){
         //     $data=User::where('name','like','%'.$key.'%')->paginate(15);
         // }
-
+//dd($data);
         return view('admin.review.index', compact('data'));
     }
 
@@ -78,7 +78,13 @@ class ReviewController extends Controller
      */
     public function update(Request $request, $id)
     {
-      dd($request->all());
+        $review = Review::find($id);
+        $review->rating = $request->rating;
+        $review->comment= $request->comment;
+        if ( $review->save()){
+            return redirect()->route('admin.review.index')->with('success',' Thay đổi thành công.');
+        }
+
     }
 
     /**
