@@ -123,7 +123,6 @@ class SanphamController extends Controller
 
         $deleteimage=false;
         $oldimage=public_path('uploads/'.$sanpham->anh);
-
         if ($request->has('file_upload')){
             $file=$request->file_upload;
             $ext=$file->extension();
