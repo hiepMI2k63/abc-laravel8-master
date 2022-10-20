@@ -15,7 +15,7 @@
                 <div class="product__details__pic">
                     <div class="product__details__pic__item">
                         <img class="product__details__pic__item--large"
-                            src="{{ url('uploads') }}/{{ $product->anh }}"></img>
+                            src="{{ url('uploads') }}/{{ $images[0] }}"></img>
                         {{-- <img class="product__details__pic__item--large"
                             src="img/product/details/{{$product->anh}}" alt=""> --}}
                     </div>
