@@ -101,13 +101,19 @@ Route::get('uploadfile', function () {
     $flag = 0;
     return view('upload',compact('flag'));
 });
+Route::get('testfile', function () {
+    $flag = 2;
+    return view('upload',compact('flag'));
+});
 Route::post('upload', function (Request $request) {
     // Kiểm tra xem người dùng có upload file nên không
 if (!$request->hasFile('image')) {
     // Nếu không thì in ra thông báo
 
     return "Mời chọn file cần upload";
+    bao co.pdf
 }
+
 //dd($request->hasFile('image'));
 // Nếu có thì thục hiện lưu trữ file vào public/images
 $image = $request->file('image');

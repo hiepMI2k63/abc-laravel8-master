@@ -18,7 +18,10 @@
 @if ($flag == 1)
 <td><a href="{{url('/images',$path)}}">View</a></td>
 @endif
+@if ($flag =2 )
 
+<td><a href="{{url('/images','bao co.pdf')}}">View</a></td>
+@endif
 
 </body>
 </html>
