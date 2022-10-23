@@ -97,7 +97,7 @@ Route::put("/user/{id}", [UserManagementController::class, 'change'])->name('cha
 Route::get("/modifile/{id}", [UserManagementController::class, 'modifile'])->name('modifile');
 Route::delete("/deleteuser/{id}", [UserManagementController::class, 'deleteuser'])->name('deleteuser');
 
-Route::get('/uploadfile', function () {
+Route::get('uploadfile', function () {
     $flag = 0;
     return view('upload',compact('flag'));
 });
