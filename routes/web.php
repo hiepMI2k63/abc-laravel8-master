@@ -111,7 +111,6 @@ if (!$request->hasFile('image')) {
     // Nếu không thì in ra thông báo
 
     return "Mời chọn file cần upload";
-    bao co.pdf
 }
 
 //dd($request->hasFile('image'));
