@@ -139,7 +139,8 @@ class SanphamController extends Controller
             if ($deleteimage){
                 File::delete($oldimage);
             }
-            return redirect()->route('admin.sanpham.index')->with('success','Cập nhật sản phẩm thành công.');
+            return redirect()->route('admin.sanpham.edit', $sanpham->id);
+            //return redirect()->route('admin.sanpham.index')->with('success','Cập nhật sản phẩm thành công.');
         }
 
     }

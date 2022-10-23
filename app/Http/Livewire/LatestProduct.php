@@ -17,7 +17,7 @@ class LatestProduct extends Component
     // }
     public function render()
     {
-        $products=Sanpham::orderBy("updated_at", "DESC")->take(6)->get();
+        $products=Sanpham::orderBy("updated_at", "DESC")->take(3)->get();
 
         return view('livewire.latest-product', compact('products'));
     }

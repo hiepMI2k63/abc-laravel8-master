@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CheckOut;
 use App\Http\Livewire\TestComponent;
 use App\Http\Middleware\CheckCustomer;
-
+use Illuminate\Http\Request;// cho
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -96,3 +96,25 @@ Route::get("/orderstatus", [CheckOut::class, 'orderstatus'])->name('orderstatus'
 Route::put("/user/{id}", [UserManagementController::class, 'change'])->name('change');
 Route::get("/modifile/{id}", [UserManagementController::class, 'modifile'])->name('modifile');
 Route::delete("/deleteuser/{id}", [UserManagementController::class, 'deleteuser'])->name('deleteuser');
+
+Route::get('/uploadfile', function () {
+    $flag = 0;
+    return view('upload',compact('flag'));
+});
+Route::post('upload', function (Request $request) {
+    // Kiểm tra xem người dùng có upload file nên không
+if (!$request->hasFile('image')) {
+    // Nếu không thì in ra thông báo
+
+    return "Mời chọn file cần upload";
+}
+//dd($request->hasFile('image'));
+// Nếu có thì thục hiện lưu trữ file vào public/images
+$image = $request->file('image');
+
+$storedPath = $image->move('images', $image->getClientOriginalName());
+$flag = 1;
+$path = $image->getClientOriginalName();
+return view('upload',compact('flag','path'));
+
+})->name('upload.handle');
